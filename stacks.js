@@ -45,6 +45,57 @@ function display(stack) {
   }
 }
 
+function is_palindrome(string) {
+  string = string.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  // Your code goes here
+  let forwardStack = new Stack();
+  for (let i=0; i<string.length; i++){
+    forwardStack.push(string[i])
+  }
+  // console.log(forwardStack.top.data)
+  let backwardStack = new Stack();
+  for (let i=string.length; i>=0; i--){
+    backwardStack.push(string[i])
+  }
+ 
+  for (let i=0; i < string.length; i++){
+    if(forwardStack.pop() !== backwardStack.pop()) return false
+  }
+    return true;
+}
+
+// True, true, true, false
+// console.log(is_palindrome("dad"));
+// console.log(is_palindrome("A man, a plan, a canal: Panama"));
+// console.log(is_palindrome("1001"));
+// console.log(is_palindrome("Tauhida"));
+
+
+// (())
+function checkMatching(expression) {
+  let stack = new Stack();
+  for(let i=0; i<expression.length; i++){
+    if (expression[i] === '('){
+      stack.push(expression[i])
+    }
+    if (expression[i] === ')'){
+      if(isEmpty(stack)){
+        console.log('missing "("')
+        return false;
+      }
+      stack.pop()
+    }
+  }
+
+  if(!isEmpty(stack)){
+    console.log('missing ")"')
+    return false;
+  } else {
+    return true;
+  }
+}
+console.log(checkMatching('(())'))
+
 function main() {
   const starTrek = new Stack();
 
@@ -54,10 +105,15 @@ function main() {
   starTrek.push('McCoy');
   starTrek.push('Scotty');
 
-  //2
-  console.log(peek(starTrek));
-  console.log(isEmpty(starTrek));
-  display(starTrek);
+
+  // //2
+  // console.log(peek(starTrek));
+  // console.log(isEmpty(starTrek));
+  // display(starTrek);
+  starTrek.pop();
+  starTrek.pop();
+  starTrek.push('Scotty');
+  // display(starTrek);
 }
 
 main();
