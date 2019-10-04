@@ -26,13 +26,38 @@ class Stack {
   }
 }
 
+function peek(stack) {
+  return stack.top;
+}
+
+function isEmpty(stack) {
+  if (!stack.top) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function display(stack) {
+  while (stack.top !== null) {
+    console.log(stack.top.data);
+    stack.top = stack.top.next;
+  }
+}
+
 function main() {
   const starTrek = new Stack();
 
+  // 1
   starTrek.push('Kirk');
   starTrek.push('Spock');
   starTrek.push('McCoy');
   starTrek.push('Scotty');
+
+  //2
+  console.log(peek(starTrek));
+  console.log(isEmpty(starTrek));
+  display(starTrek);
 }
 
 main();
