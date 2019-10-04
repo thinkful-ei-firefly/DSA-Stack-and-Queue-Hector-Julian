@@ -36,3 +36,42 @@ class Queue {
     return node.value;
   }
 }
+
+function peek(queue) {
+  return queue.first;
+}
+
+function isEmpty(queue) {
+  if (!queue.first) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function display(queue) {
+  while (queue.first !== null) {
+    console.log(queue.first.value);
+    queue.first = queue.first.next;
+  }
+}
+
+function main() {}
+
+starTrekQ = new Queue();
+starTrekQ.enqueue('Kirk');
+starTrekQ.enqueue('Spock');
+starTrekQ.enqueue('Uhura');
+starTrekQ.enqueue('Sulu');
+starTrekQ.enqueue('Checkov');
+
+// console.log(peek(starTrekQ));
+// console.log(isEmpty(starTrekQ));
+// display(starTrekQ);
+
+starTrekQ.dequeue();
+starTrekQ.dequeue();
+starTrekQ.enqueue('Kirk');
+display(starTrekQ);
+
+main();
