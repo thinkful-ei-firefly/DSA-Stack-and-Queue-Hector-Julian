@@ -46,22 +46,22 @@ function display(stack) {
 }
 
 function is_palindrome(string) {
-  string = string.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  string = string.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
   // Your code goes here
   let forwardStack = new Stack();
-  for (let i=0; i<string.length; i++){
-    forwardStack.push(string[i])
+  for (let i = 0; i < string.length; i++) {
+    forwardStack.push(string[i]);
   }
   // console.log(forwardStack.top.data)
   let backwardStack = new Stack();
-  for (let i=string.length; i>=0; i--){
-    backwardStack.push(string[i])
+  for (let i = string.length; i >= 0; i--) {
+    backwardStack.push(string[i]);
   }
- 
-  for (let i=0; i < string.length; i++){
-    if(forwardStack.pop() !== backwardStack.pop()) return false
+
+  for (let i = 0; i < string.length; i++) {
+    if (forwardStack.pop() !== backwardStack.pop()) return false;
   }
-    return true;
+  return true;
 }
 
 // True, true, true, false
@@ -70,31 +70,51 @@ function is_palindrome(string) {
 // console.log(is_palindrome("1001"));
 // console.log(is_palindrome("Tauhida"));
 
-
 // (())
 function checkMatching(expression) {
   let stack = new Stack();
-  for(let i=0; i<expression.length; i++){
-    if (expression[i] === '('){
-      stack.push(expression[i])
+  for (let i = 0; i < expression.length; i++) {
+    if (expression[i] === '(') {
+      stack.push(expression[i]);
     }
-    if (expression[i] === ')'){
-      if(isEmpty(stack)){
-        console.log('missing "("')
+    if (expression[i] === ')') {
+      if (isEmpty(stack)) {
+        console.log('missing "("');
         return false;
       }
-      stack.pop()
+      stack.pop();
     }
   }
 
-  if(!isEmpty(stack)){
-    console.log('missing ")"')
+  if (!isEmpty(stack)) {
+    console.log('missing ")"');
     return false;
   } else {
     return true;
   }
 }
-console.log(checkMatching('(())'))
+console.log(checkMatching('(())'));
+
+function sortStack(stack) {
+  let temp = '';
+  let tempStack = new Stack();
+
+  while (stack.top) {
+    temp = stack.pop();
+    while (tempStack.top && temp > tempStack.top.data) {
+      stack.push(tempStack.pop());
+    }
+    tempStack.push(temp);
+  }
+  return tempStack;
+}
+
+const newStack = new Stack();
+newStack.push(2);
+newStack.push(4);
+newStack.push(3);
+newStack.push(1);
+display(sortStack(newStack));
 
 function main() {
   const starTrek = new Stack();
@@ -104,7 +124,6 @@ function main() {
   starTrek.push('Spock');
   starTrek.push('McCoy');
   starTrek.push('Scotty');
-
 
   // //2
   // console.log(peek(starTrek));
